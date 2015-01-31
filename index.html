@@ -1,0 +1,716 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="application-name" content="Battle Pirates Ship Calculator" />
+	<meta name="description" content="A ship designer for Battle Pirates" />
+	<meta name="keywords" content="Battle Pirates, Ship Yard, Ship, Yard, Builder, Calculator" />
+	<title>Battle Pirates Ship Calculator</title>
+	<!--
+
+		BATTLE PIRATES SHIP CALCULATOR (0.1)
+		A web app for calculating and comparing ship builds for Battle Pirates.
+
+		1-31-2015
+		ken.sugiura@gmail.com
+
+		* This site is not endorsed by or affiliated with Kixeye or Battle Pirates.
+
+		MIT License
+
+	-->
+	<link rel="stylesheet" type="text/css" href="css/bpsc.css" />
+	<link rel="stylesheet" type="text/css" href="css/bpscFonts.css" />
+	<script type="text/javascript" src="js/bpsc.js"></script>
+</head>
+
+<body>
+
+	<div class="cover-dark" id="shroud">LOADING...</div>
+
+	<div class="main-wrapper">
+
+		<div class="main-wrapper-head">
+			<div class="main-head-wrapper-top"></div>
+			<div class="main-head-wrapper-bottom">
+				<div class="main-head-tab-wrapper">
+					<a class="main-head-tab" id="main-tab-shipyard" >Shipyard</a>
+					<a class="main-head-tab" id="main-tab-datatable">Ship Part Ref</a>
+					<a class="main-head-tab hidden" id="main-tab-battlemap"    >Battle!</a>
+					<a class="main-head-tab hidden" id="main-tab-timeconverter">Time Converter</a>
+					<a class="main-head-tab hidden" id="main-tab-resources"    >Links</a>
+					<a class="main-head-tab hidden" id="main-tab-formulas"     >Formulas</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="main-wrapper-body">
+
+			<div class="main-view backcolor-light"        id="main-view-shipyard" >
+				<div class="view-wrapper sy-wrapper">
+
+					<div class="view-wrapper-head sy-wrapper-head backcolor-light">
+						<h1>SHIPYARD</h1>
+						<div class="button-group">
+							<input class="button-small" type="button" value="Reset Ship"  id="sy-reset-ship"      />
+							<input class="button-small" type="button" value="Reset Fleet" id="sy-reset-fleet"     />
+							<input class="button-small" type="button" value="Retrofit"    id="sy-button-retrofit" />
+							<input class="button-small" type="button" value="List View"   id="sy-button-list"     />
+							<input class="button-small" type="button" value="Graph View"  id="sy-button-graph"    />
+							<input class="button-small" type="button" value="Rows / Cols" id="sy-button-row"      />
+							<input class="button-small hidden" type="button" value="Auto Build"  id="sy-button-best"     />
+							<input class="button-small" type="button" value="Ship Save"   id="sy-button-shipsave" />
+						</div>
+					</div>
+
+					<div class="view-wrapper-body sy-wrapper-body backcolor-med">
+
+						<div class="sy-shipinfo backcolor-light border-med-side">
+
+							<div class="sy-shipinfo-section">
+
+								<div class="sy-shipinfo-block sy-shipinfo-head">
+									<div class="sy-shipinfo-ship">
+										<div class="sy-shipinfo-slot">
+											<div id="sy-list-col-hull"></div>
+										</div>
+										<div class="sy-shipinfo-slot">
+											<div class="sy-shipinfo-slot sy-item-slot rank" id="sy-shiprank"></div>
+										</div>
+									</div>
+									<h2 class="text-center" id="sy-shipdata-s1"></h2>
+									<p  class="text-blue text-center" id="sy-shipdata-s2"></p>
+									<p  class="text-blue text-center">Underwater Weapons?
+										<span class="text-yellow" id="sy-shipdata-s3"></span>
+									</p>
+									<p  class="text-blue text-center">Air Weapons?
+										<span class="text-yellow" id="sy-shipdata-s4"></span>
+									</p>
+								</div>
+
+							</div>
+
+							<div class="sy-shipinfo-section">
+
+								<div class="sy-shipinfo-col sy-shipinfo-block">
+
+									<table class="sy-shipdata-table sy-ship-totals">
+										<caption><h3>Totals</h3></caption>
+										<colgroup>
+											<col style="width:40%;" />
+											<col style="width:60%;" />
+										</colgroup>
+										<tbody>
+											<tr><td>DPS:</td   ><td id="sy-shipdata-t1"></td></tr>
+											<tr><td>BDPS:</td  ><td id="sy-shipdata-t2"></td></tr>
+											<tr><td>Armor:</td ><td id="sy-shipdata-t3"></td></tr>
+											<tr>
+												<td>Weight:</td>
+												<td>
+													<span id="sy-shipdata-w1"></span>
+													<span class="text-white">/</span>
+													<span id="sy-shipdata-w2"></span>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+
+									<div class="sy-weight-block" id="sy-ship-weight"></div>
+
+									<table class="sy-shipdata-table">
+										<caption><h3>Stats</h3></caption>
+										<colgroup>
+											<col style="width:64%;" />
+											<col style="width:36%;" />
+										</colgroup>
+										<tbody>
+											<tr><td>Cargo:</td><td id="sy-shipdata-o1"></td></tr>
+											<tr>
+												<td>Sonar Range:</td>
+												<td id="sy-shipdata-u1"></td>
+											</tr>
+											<tr>
+												<td>Surface Time:</td>
+												<td id="sy-shipdata-u2"></td>
+											</tr>
+											<tr>
+												<td>Cloak Time:</td>
+												<td id="sy-shipdata-u3"></td>
+											</tr>
+										</tbody>
+									</table>
+
+								</div>
+
+								<div class="sy-shipinfo-col sy-shipinfo-block">
+
+									<table class="sy-shipdata-table">
+										<caption><h3>Movement</h3></caption>
+										<colgroup>
+											<col style="width:72%;" />
+											<col style="width:28%;" />
+										</colgroup>
+										<tbody>
+											<tr><td>Map Speed:</td   ><td id="sy-shipdata-m1"></td></tr>
+											<tr><td>Combat Speed:</td><td id="sy-shipdata-m2"></td></tr>
+											<tr><td>Turn Speed:</td  ><td id="sy-shipdata-m3"></td></tr>
+											<tr><td>Evasion:</td     ><td id="sy-shipdata-m4"></td></tr>
+										</tbody>
+									</table>
+
+									<table class="sy-shipdata-table">
+										<caption><h3>Defense Bonus</h3></caption>
+										<colgroup><col style="width:72%;" /><col style="width:28%;" /></colgroup>
+										<tbody>
+											<tr><td>Ballistic:</td   ><td id="sy-shipdata-d1"></td></tr>
+											<tr><td>Penetrating:</td ><td id="sy-shipdata-d2"></td></tr>
+											<tr><td>Explosive:</td   ><td id="sy-shipdata-d3"></td></tr>
+											<tr><td>Concussive:</td  ><td id="sy-shipdata-d4"></td></tr>
+											<tr><td>Radioactive:</td ><td id="sy-shipdata-d5"></td></tr>
+										</tbody>
+									</table>
+
+								</div>
+
+							</div>
+
+							<div class="sy-shipinfo-section">
+
+								<div class="sy-shipinfo-col sy-shipinfo-block">
+
+									<table class="sy-shipdata-table">
+										<caption><h3>Repairs</h3></caption>
+										<colgroup>
+											<col style="width:48%;" />
+											<col style="width:52%;" />
+										</colgroup>
+										<tbody>
+											<tr><td colspan="2">Repair Time:</td></tr>
+											<tr><td colspan="2" class="text-yellow" id="sy-shipdata-r1"></td></tr>
+											<tr class="hidden"><td>Oil:</td       ><td id="sy-shipdata-r2"></td></tr>
+											<tr class="hidden"><td>Metal:</td     ><td id="sy-shipdata-r3"></td></tr>
+											<tr class="hidden"><td>Energy:</td    ><td id="sy-shipdata-r4"></td></tr>
+											<tr class="hidden"><td>Zynth:</td     ><td id="sy-shipdata-r5"></td></tr>
+											<tr>
+												<td colspan="2" class="text-blue">
+													Insta Repair?
+													<span id="sy-shipdata-r6" class="text-yellow"></span>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+
+									<table class="sy-shipdata-table">
+										<caption><h3>Resource Cost</h3></caption>
+										<colgroup>
+											<col style="width:40%;" />
+											<col style="width:60%;" />
+										</colgroup>
+										<tbody>
+											<tr><td colspan="2">Build Time:</td></tr>
+											<tr><td colspan="2" class="text-yellow" id="sy-shipdata-b1"></td></tr>
+											<tr><td>Oil:</td       ><td id="sy-shipdata-b2"></td></tr>
+											<tr><td>Metal:</td     ><td id="sy-shipdata-b3"></td></tr>
+											<tr><td>Energy:</td    ><td id="sy-shipdata-b4"></td></tr>
+											<tr><td>Zynth:</td     ><td id="sy-shipdata-b5"></td></tr>
+										</tbody>
+									</table>
+
+								</div>
+
+								<div class="sy-shipinfo-col sy-shipinfo-block">
+
+									<table class="sy-shipdata-table">
+										<caption><h3>Bonus Modifiers</h3></caption>
+										<colgroup>
+											<col style="width:60%;" />
+											<col style="width:40%;" />
+										</colgroup>
+										<tbody id="sy-shipdata-mods"></tbody>
+									</table>
+									
+								</div>
+
+							</div>
+
+						</div>
+
+						<div class="sy-designer">
+
+							<div class="sy-designer-head sy-box-fleet backcolor-light">
+
+								<div class="sy-fleet-section backcolor-med">
+									<div id="sy-fleet"></div>
+								</div>
+
+								<div class="sy-fleet-section">
+									<p title="+10% fleet speed">
+										<input class="check" type="checkbox" id="sy-officer-fsp" />
+										Fleet Captain
+									</p>
+									<p title="+10% ship construction speed">
+										<input class="check" type="checkbox" id="sy-officer-bt" />
+										Master Engineer
+									</p>
+									<p title="+10% ship repair speed">
+										<input class="check" type="checkbox" id="sy-officer-rt" />
+										Master Fixer
+									</p>
+								</div>
+
+								<div class="sy-fleet-section">
+									<p>
+										Shipyard:&nbsp;
+										<select id="sy-shipyard-level">
+											<option value="0" selected="selected">Level 1</option>
+											<option value="1">Level 2</option>
+										</select>
+									</p>
+									<p>
+										Dock:&nbsp;
+										<select id="sy-dock-level">
+											<option value="0" selected="selected">Level 1</option>
+											<option value="1">Level 2</option>
+											<option value="2">Level 3</option>
+											<option value="3">Level 4</option>
+											<option value="4">Level 5</option>
+											<option value="5">Level 6</option>
+											<option value="6">Level 7</option>
+											<option value="7">Level 8</option>
+											<option value="8">Level 9</option>
+											<option value="9">Level 10</option>
+										</select>
+									</p>
+								</div>
+
+								<div class="sy-fleet-section">
+									<p class="sy-shipdata-table sy-ship-totals">
+										<span class="text-yellow" id="sy-fleetdata-w1"></span>
+										/
+										<span class="text-yellow" id="sy-fleetdata-w2"></span>
+									</p>
+									<div class="sy-weight-block" id="sy-fleet-weight"></div>
+								</div>
+
+							</div>
+
+							<div class="sy-designer-body">
+
+								<div class="sy-designer-view"        id="sy-view-list">
+									<div class="sy-list-col" id="sy-list-col-weap"></div>
+									<div class="sy-list-col" id="sy-list-col-armr"></div>
+									<div class="sy-list-col" id="sy-list-col-spec"></div>
+									<div class="sy-list-col" id="sy-list-col-tact"></div>
+								</div>
+
+								<div class="sy-designer-view hidden" id="sy-view-graph">
+									<div class="sy-graph-col"></div>
+									<div class="sy-graph-col">
+										<div class="sy-graph-row">
+											<div class="sy-graph-block">
+												<h2>DPS Breakdown</h2>
+												<svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="width:400px;height:200px;">
+													<rect class="graph-back" x="40" y="0" width="360" height="160" />
+													<line class="graph-marker gray" x1="220" y1="0" x2="220" y2="160" stroke-dasharray="1,19" style="stroke-width:360;" />
+													<rect id="graph-dps-NON-0" x="40"  y="150" width="36" style="fill:#f0f0f0" />
+													<rect id="graph-dps-NON-1" x="76"  y="150" width="36" style="fill:#808080" />
+													<rect id="graph-dps-BAL-0" x="112" y="150" width="36" style="fill:#f0f000" />
+													<rect id="graph-dps-BAL-1" x="148" y="150" width="36" style="fill:#808000" />
+													<rect id="graph-dps-PEN-0" x="184" y="150" width="36" style="fill:#0000f0" />
+													<rect id="graph-dps-PEN-1" x="220" y="150" width="36" style="fill:#000080" />
+													<rect id="graph-dps-EXP-0" x="256" y="150" width="36" style="fill:#00f000" />
+													<rect id="graph-dps-EXP-1" x="292" y="150" width="36" style="fill:#008000" />
+													<rect id="graph-dps-CNC-0" x="328" y="150" width="36" style="fill:#f000f0" />
+													<rect id="graph-dps-CNC-1" x="364" y="150" width="36" style="fill:#800080" />
+													<rect class="graph-border" x="40" y="0" width="360" height="160" />
+													<g class="axis-label white">
+														<text x="45"  y="175">DPS|BDPS</text>
+														<text x="137" y="175">Bal</text>
+														<text x="209" y="175">Pen</text>
+														<text x="281" y="175">Exp</text>
+														<text x="353" y="175">Con</text>
+														<g class="axis-label gray">
+															<text x="0"   y="170">&nbsp;&nbsp;&nbsp;0</text>
+															<text x="0"   y="130">&nbsp;500</text>
+															<text x="0"   y="90" >1000</text>
+															<text x="0"   y="50" >1500</text>
+															<text x="0"   y="10" >2000</text>
+														</g>
+													</g>
+												</svg>
+											</div>
+											<div class="sy-graph-block">
+												<h2>Defense Capability</h2>
+												<div class="GreyBack FullCol">
+													<table class="sy-shipdata-table" style="float:left;width:100px;" id="graph-def-table">
+														<colgroup>
+															<col style="width:50%;" />
+															<col style="width:50%;" />
+														</colgroup>
+														<tbody>
+															<tr><td>BASE:</td><td id="graph-armor-A"></td></tr>
+															<tr><td>Bal:</td><td  id="graph-armor-0"></td></tr>
+															<tr><td>Pen:</td><td  id="graph-armor-1"></td></tr>
+															<tr><td>Exp:</td><td  id="graph-armor-2"></td></tr>
+															<tr><td>Con:</td><td  id="graph-armor-3"></td></tr>
+															<tr><td>Bonus</td><td><input id="graph-def-check-1" class="check" type="checkbox" checked="true" /></td></tr>
+															<tr><td>Evade</td><td><input id="graph-def-check-2" class="check" type="checkbox" checked="true" /></td></tr>
+															<tr><td>Other</td><td><input id="graph-def-check-3" class="check" type="checkbox" checked="true" /></td></tr>
+														</tbody>
+													</table>
+													<svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="width:200px;height:200px;">
+														<polygon class="graph-back" points="100,20 180,100 100,180 20,100" />
+														<polygon id="graph-def" points="100,99 101,100 100,101 99,100"    style="stroke:#2020f0;stroke-width:2;fill:#2020f0;" />
+														<line class="graph-axis-dotted" x1="100" y1="20"  x2="100" y2="180" stroke-dasharray="1,7" />
+														<line class="graph-axis-dotted" x1="20"  y1="100" x2="180" y2="100" stroke-dasharray="1,7" />
+														<polygon class="graph-border" points="100,20 180,100 100,180 20,100" />
+														<g class="axis-label white">
+															<text x="68"  y="25"  >Bal</text>
+															<text x="175" y="90"  >Pen</text>
+															<text x="108" y="184" >Con</text>
+															<text x="0"   y="115" >Exp</text>
+														</g>
+													</svg>
+												</div>
+											</div>
+										</div>
+										<div class="sy-graph-row">
+											<div class="sy-graph-block">
+												<h2>DPS Distribution</h2>
+												<svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="width:680px;height:50px;margin:auto;">
+													<rect class="graph-back" x="40" y="5" width="600" height="20" />
+													<line class="graph-marker gray  dps-bar" x1="39" y1="15" x2="639" y2="15" stroke-dasharray="1,9" />
+													<g id="graph-dmg-rng">
+														<rect x="40" y="5" width="0" height="20" style="fill:#f00000;" />
+														<rect x="40" y="5" width="0" height="20" style="fill:#f08000;" />
+														<rect x="40" y="5" width="0" height="20" style="fill:#f0f000;" />
+														<rect x="40" y="5" width="0" height="20" style="fill:#80f000;" />
+														<rect x="40" y="5" width="0" height="20" style="fill:#00f000;" />
+														<rect x="40" y="5" width="0" height="20" style="fill:#00f080;" />
+														<rect x="40" y="5" width="0" height="20" style="fill:#00f0f0;" />
+														<rect x="40" y="5" width="0" height="20" style="fill:#0080f0;" />
+														<rect x="40" y="5" width="0" height="20" style="fill:#0000f0;" />
+														<rect x="40" y="5" width="0" height="20" style="fill:#8000f0;" />
+														<rect x="40" y="5" width="0" height="20" style="fill:#f000f0;" />
+														<rect x="40" y="5" width="0" height="20" style="fill:#f00080;" />
+													</g>
+													<line class="graph-marker white dps-bar" x1="39" y1="15" x2="639" y2="15" stroke-dasharray="1,49"  />
+													<line class="graph-marker white dps-bar" x1="39" y1="15" x2="639" y2="15" stroke-dasharray="2,248" />
+													<rect class="graph-border" x="40" y="5" width="600" height="20" />
+													<svg id="graph-sonar" x="0" width="30" height="15" viewBox="-5 -1 30 16">
+														<polygon class="graph-border" points="0,0 20,0 10,10" style="fill:#88f" />
+														<g class="axis-label gray">
+															<text x="175" y="10">P</text>
+															<text x="200" y="10">B</text>
+															<text x="250" y="10">S</text>
+														</g>
+													</svg>
+													<g class="axis-label gray">
+														<text x="35"  y="40">0</text>
+														<text x="85"  y="40">10</text>
+														<text x="135" y="40">20</text>
+														<text x="185" y="40">30</text>
+														<text x="235" y="40">40</text>
+														<text x="285" y="40">50</text>
+														<text x="335" y="40">60</text>
+														<text x="385" y="40">70</text>
+														<text x="435" y="40">80</text>
+														<text x="485" y="40">90</text>
+														<text x="535" y="40">100</text>
+														<text x="585" y="40">110</text>
+														<text x="635" y="40">120</text>
+													</g>
+												</svg>
+												<br />
+												<table class="graph-range-table">
+													<tr id="graph-range-data-0">
+														<td>Total</td>
+														<td style="background-color:#f00000;"></td>
+														<td style="background-color:#f08000;"></td>
+														<td style="background-color:#f0f000;"></td>
+														<td style="background-color:#80f000;"></td>
+														<td style="background-color:#00f000;"></td>
+														<td style="background-color:#00f080;"></td>
+														<td style="background-color:#00f0f0;"></td>
+														<td style="background-color:#0080f0;"></td>
+														<td style="background-color:#0000f0;"></td>
+														<td style="background-color:#8000f0;"></td>
+														<td style="background-color:#f000f0;"></td>
+														<td style="background-color:#f00080;"></td>
+													</tr>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="sy-designer-view hidden" id="sy-view-ship" ></div>
+
+							</div>
+
+						</div>
+
+					</div>
+
+					<div class="sy-view-menu     hidden" id="sy-view-menu" >
+
+						<div class="sy-menu frame-blue hidden" id="sy-menu-retrofit">
+							<h2>Retrofit Options</h2>
+							<div class="menu-body"></div>
+							<div class="menu-footer button-group">
+								<input class="button-small" type="button" value="Close"       id="retrofit-button-close" />
+							</div>
+						</div>
+
+						<div class="sy-menu frame-blue hidden" id="sy-menu-best">
+							<h2>Ship Build Calculator</h2>
+							<div class="menu-body">
+								<div class="best-col">
+									<div class="best-section">
+										Defense<input type="range" min="0" max="100" value="75" id="best-weighting" />Offense
+									</div>
+									<div class="best-section" id="best-section-armr">
+										<h2>Armor Constraints</h2>
+										<form id="best-settings-armr" action="">
+											<div class="best-row">
+												<input class="check"    type="checkbox" checked="true"         id="best-input-check"  />
+												Max Weight:
+												<input class="text-box" type="text" placeholder="Weight Limit" id="best-input-weight" />
+											</div>
+											<div class="best-result frame-blue" id="best-result-armr"></div>
+										</form>
+									</div>
+									<div class="best-section" id="best-section-weap">
+										<h2>Weapon Constraints</h2>
+										<form id="best-settings-weap" action="">
+											<div class="best-row">
+												<input class="check"    type="checkbox" checked="true"         id="best-input-check"  />
+												Max Weight:
+												<input class="text-box" type="text" placeholder="Weight Limit" id="best-input-weight" />
+												Range:
+												<input class="text-box" type="text" placeholder="Target Range" id="best-input-range"  />
+											</div>
+											<div class="best-row">
+												Damage Type:
+												<select id="best-input-dtype-0">
+													<option value="0" selected="selected">Ship</option>
+													<option value="1">Base</option>
+												</select>
+												<select id="best-input-dtype-1">
+													<option value="0" selected="selected">Any</option>
+													<option value="1">Ballistic</option>
+													<option value="2">Penetrating</option>
+													<option value="3">Explosive</option>
+													<option value="4">Concussive</option>
+												</select>
+											</div>
+											<div class="best-result frame-blue" id="best-result-weap"></div>
+										</form>
+									</div>
+								</div>
+							</div>
+							<div class="menu-footer button-group">
+								<input class="button-small" type="button" value="Find Best"  id="best-button-find"  />
+								<input class="button-small" type="button" value="Build Ship" id="best-button-build" />
+								<input class="button-small" type="button" value="Cancel"     id="best-button-close" />
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+
+			<div class="main-view backcolor-light hidden" id="main-view-datatable">
+				<div class="view-wrapper dt-wrapper">
+
+					<div class="view-wrapper-head dt-wrapper-head backcolor-light">
+						<h1>SHIP PARTS REFERENCE TABLE</h1>
+						<div class="button-group">
+							<input class="button-small" type="button" value="Hulls"   id="dt-button-0" />
+							<input class="button-small" type="button" value="Weapons" id="dt-button-1" />
+							<input class="button-small" type="button" value="Armor"   id="dt-button-2" />
+							<input class="button-small" type="button" value="Specials" />
+						</div>
+					</div>
+
+					<div class="view-wrapper-body dt-wrapper-body backcolor-med">
+						<div class="backcolor-light border-med-side" id="dt-menu-v">
+							<h2>Show/Hide Items</h2>
+							<h3>Tech</h3>
+							<div class="dt-menu-v-checklist">
+								<input class="Check" type="checkbox" checked="true" value="0" />Forsaken<br />
+								<input class="Check" type="checkbox" checked="true" value="1" />Draconian<br />
+								<input class="Check" type="checkbox" checked="true" value="2" />Reaver<br />
+							</div>
+							<div></div>
+							<h2>Show/Hide Info</h2>
+							<div></div>
+						</div>
+						<div class="dt-table-box backcolor-dark">
+							<table class="dt-table-data">
+								<tbody id="dt-table-tbody"></tbody>
+							</table>
+							<br />
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<div class="main-view backcolor-light hidden" id="main-view-battlemap">
+				<div class="view-wrapper bm-wrapper">
+
+					<div class="view-wrapper-head bm-wrapper-head backcolor-light">
+						<h1>BATTLE SIMULATOR</h1>
+						<div>
+							<input class="button-small" type="button" value="Start" id="bm-button-start" />
+							<input class="button-small" type="button" value="Setup" id="bm-button-setup" />
+						</div>
+					</div>
+
+					<div class="view-wrapper-body bm-wrapper-body backcolor-med">
+
+						<div class="bm-body-view" id="bm-view-battle">
+							<div class="bm-battle-map" >
+								<div class="bm-sea" id="bm-map"></div>
+							</div>
+							<div class="bm-battle-info back-color-med">
+								<h2>INFO</h2>
+								<p>t = <span id="bm-time-counter">0</span>s</p>
+								<p id="bm-info"></p>
+							</div>
+						</div>
+
+						<div class="bm-body-view bm-setup-wrapper hidden" id="bm-view-setup">
+							<div class="bm-setup-options backcolor-light">
+								<input class="button-small" type="button" value="Add Team" id="bm-button-team-add" />
+							</div>
+							<div class="bm-setup-teams" id="bm-setup-teams"></div>
+						</div>
+
+					</div>
+
+					<div class="sy-view-menu hidden" id="bm-view-menu" ></div>
+
+				</div>
+			</div>
+
+			<div class="main-view backcolor-light hidden" id="main-tool-timeconverter">
+				<div class="view-wrapper-head"><h1>TIME CONVERTER</h1></div>
+				<div class="view-wrapper-body main-tool">
+					<p>
+						<input class="text-box" id="tc-1" style="width:50px;" type="text" value="0" />d
+						<input class="text-box" id="tc-2" style="width:50px;" type="text" value="0" />h
+						<input class="text-box" id="tc-3" style="width:50px;" type="text" value="0" />m
+						<input class="text-box" id="tc-4" style="width:50px;" type="text" value="0" />s
+						<input class="button-small" type="button" value="T to S" 
+							onclick="document.getElementById('tc-result').innerHTML=Number(
+								document.getElementById('tc-1').value*86400+
+								document.getElementById('tc-2').value*3600+
+								document.getElementById('tc-3').value*60+
+								Number(document.getElementById('tc-4').value)
+							);"
+						/>
+					</p>
+					<p>
+						<input class="text-box" id="tc-secs" type="text" value="0" />
+						<input class="button-small" type="button" value="S to T"
+							onclick="document.getElementById('tc-result').innerHTML=zuiz.timeConvert(document.getElementById('tc-secs').value);" />
+					</p>
+					<code id="tc-result">0</code>
+				</div>
+			</div>
+
+			<div class="main-view backcolor-light hidden" id="main-tool-resources">
+				<!-- Special Thanks to the following: -->
+				<div class="view-wrapper-head"><h1>LINKS</h1></div>
+				<div class="view-wrapper-body main-tool">
+					<a target="_blank" href="https://www.kixeye.com/game/battlepirates">Play Battle Pirates</a><br />
+					<a target="_blank" href="https://apps.facebook.com/battlepirates/">Play Battle Pirates on FB</a><br />
+					<a target="_blank" href="http://forums.kixeye.com/showthread.php?t=244964">The M's Secrets of the Game</a><br />
+					<a target="_blank" href="http://forums.kixeye.com/threads/135111-The-Complete-Guide-to-Blueprints">The R's Complete Guide to BluePrints</a><br />
+					<a target="_blank" href="http://battlepirates.wikia.com">Battle Pirates Wikia</a><br />
+					<a target="_blank" href="https://docs.google.com/spreadsheets/d/1wZWVT1KSJ77Pm7DlOsCARcT6SlZUYcxx-T41ojJG81U/edit?pli=1#gid=542242314">Hull Chart</a><br />
+					<a target="_blank" href="https://www.kixeye.com/forum/discussion/438421/p1">All Maths and game mechanics of battle pirates</a><br />
+				</div>
+			</div>
+
+			<div class="main-view backcolor-light hidden" id="main-tool-formulas">				
+				<div class="view-wrapper-head"><h1>FORMULAS</h1></div>
+				<div class="view-wrapper-body main-tool">
+					<h2>SPECIAL MODIFIERS</h2>
+					<p>special modifiers for most specials are stacked using this formula</p>
+					<code>a * (1 + b) = c</code>
+					<p>
+						a = modifier value 1<br />
+						b = modifier value 2<br />
+						c = stacked modifier value
+					</p>
+					<h2>DEFENSE BONUS</h2>
+					<code>a * (1 - b) = c</code>
+					<p>
+						a = defense bonus 1<br />
+						b = defense bonus 2<br />
+						c = stacked defense bonus
+					</p>
+					<h2>WEIGHT</h2>
+					<p>calculating total weight</p>
+					<code>
+						hidden_weight = FLOOR(hull_armor / 4)
+					</code>
+					<p>
+						hull_armor = base armor points of hull
+					</p>
+					<code>
+						WP(p, wm) = FLOOR( FLOOR(p_weight * mYL) * wm)
+					</code>
+					<p>
+					
+						p = ship part<br />
+						wm = weight modifer<br />
+						p_weight = weight of ship part, p<br />
+						mYL = shipyard level modifier (mYL = 1 if level 1, mYL =  0.85 if level 2)
+					</p>
+					<code>
+						total_weight = FLOOR(<br />
+							(WP(w<sub>1</sub>, mW) + WP(w<sub>2</sub>, mW) + ... + WP(weapon<sub>n</sub>, mW) + <br />
+							WP(a<sub>1</sub>, mA) + WP(a<sub>2</sub>, mA) + ... + WP(armor<sub>n</sub>, mA) + <br />
+							WP(tm<sub>1</sub>, mTM) + WP(tm<sub>2</sub>, mTM) + ... + WP(tm<sub>n</sub>, mTM) + <br />
+							FLOOR(hidden_weight * mA) - hidden_weight
+							) * mT<br />
+						)
+					</code>
+					<p>
+						w = weapon<br />
+						a = armor<br />
+						tm = tactical module
+					</p>
+					<p>
+						mT = Total Weight modifier<br />
+						mW = Weapon Weight modifier<br />
+						mA = Armor Weight modifier<br />
+						mTM = Tactical Module Weight modifier
+					</p>
+					<h2>DPS</h2>
+					<p>damage per second, t</p>
+					<code>t = (a * d)/(r + s * f)</code>
+					<p>
+						a = Accuracy<br />
+						d = Damage<br />
+						r = Reload<br />
+						s = Salvo<br />
+						f = firing speed (usually around 0.1)
+					</p>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+
+</body>
+
+</html>

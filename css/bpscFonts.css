@@ -1,0 +1,62 @@
+@charset "UTF-8";
+
+/* //// FONT FILES //// */
+
+/* OCRA */
+
+@font-face {
+	font-family : "OCRA Std";
+	src         : url("../fonts/OCRAStd.otf");
+}
+
+/* Courier New */
+
+@font-face {
+	font-family : "Courier New";
+	src         : url("../fonts/Courier New.ttf");
+}
+
+@font-face {
+	font-family : "Courier New";
+	src         : url("../fonts/Courier New Bold.ttf");
+	font-weight : bold;
+}
+
+@font-face {
+	font-family : "Courier New";
+	src         : url("../fonts/Courier New Italic.ttf");
+	font-style  : italic;
+}
+
+@font-face {
+	font-family : "Courier New";
+	src         : url("../fonts/Courier New Bold Italic.ttf");
+	font-weight : bold;
+	font-style  : italic;
+}
+
+/* VeraMono */
+
+@font-face {
+	font-family : "VeraMono";
+	src         : url("../fonts/VeraMono.ttf");
+}
+
+@font-face {
+	font-family : "VeraMono";
+	src         : url("../fonts/VeraMono-Bold.ttf");
+	font-weight : bold;
+}
+
+@font-face {
+	font-family : "VeraMono";
+	src         : url("../fonts/VeraMono-Italic.ttf");
+	font-style  : italic;
+}
+
+@font-face {
+	font-family : "VeraMono";
+	src         : url("../fonts/VeraMono-Bold-Italic");
+	font-weight : bold;
+	font-style  : italic;
+}

@@ -1,0 +1,1158 @@
+@charset "UTF-8";
+
+/* //////// COMMON //////// */
+
+* {
+	margin   : 0;
+	padding  : 0;
+	overflow : hidden;
+	box-sizing         : border-box;
+	-moz-box-sizing    : border-box;
+	-webkit-box-sizing : border-box;
+}
+
+html,
+body {
+	width  : 100%;
+	height : 100%;
+}
+
+html {
+	overflow : auto;
+}
+
+body {
+	background-color : #111;
+	color            : #fff;
+}
+
+/* //// Typography //// */
+
+	/* Font Family */
+
+h1 {
+	font-family : VeraMono, verdana, geneva, arial, sans-serif;
+	font-weight : bold;
+}
+
+a,
+a.main-head-tab,
+.item-icon,
+.button-small,
+.sy-shipdata-table.sy-ship-totals {
+	font-family : "OCRA Std", "lucida console", monaco, monospace;
+}
+
+h2,
+.axis-label {
+	font-family : VeraMono, "OCRA Std", "lucida console", monaco, sans-serif;
+}
+
+p,
+table,
+h3,
+.text-box,
+.menu-body,
+.dt-menu-v-checklist {
+	font-family : VeraMono, "Courier New", "courier new", courier, sans-serif;
+}
+
+	/* Font Size */
+
+p,
+table,
+h3,
+.item-icon,
+.text-box,
+.menu-body,
+.dt-menu-v-checklist {
+	font-size : 8pt;
+}
+
+.sy-shipdata-table.sy-ship-totals {
+	font-size : 9pt;
+}
+
+.button-small,
+.axis-label {
+	font-size : 10pt;
+}
+
+a,
+h2 {
+	font-size : 12pt;
+}
+
+h1 {
+	font-size : 22pt;
+}
+
+/* //// Styling //// */
+
+	/* Headers and Text */
+
+h2,
+h3 {
+	display : block;
+	clear   : both;
+}
+
+h1 {
+	display : inline-block;
+	color   : #222;
+}
+
+h2 {
+	margin-top    : 12px;
+	margin-bottom : 4px;
+	color         : #fff;
+}
+
+h3 {
+	color : #888;
+}
+
+a        {color : #888;}
+a:hover  {color : #ff0;}
+a:active {color : #f00;}
+
+code {
+	display : block;
+	padding : 4px 12px;
+	background-color : #222;
+	color            : #ff0;
+}
+
+	/* Basic */
+
+td	{
+	border-style : none;
+}
+
+.hidden {
+	display : none;
+}
+
+	/* Input */
+
+input {
+	background-color : inherit;
+}
+
+.button-small {
+	width   : 120px;
+	height  : 20px;
+	margin  : 2px 2px;
+	padding : 2px 4px;
+	background-color : #444;
+	border           : 2px solid #222;
+	color            : #222;
+}
+	
+
+
+.button-small:hover {
+	background-color : #fff;
+}
+
+.check {
+	width : 20px;
+}
+
+.text-box {
+	width  : 150px;
+	height : 20px;
+	background-color : #111;
+	border           : 2px solid #888;
+	color            : #ff0;
+}
+
+	/* Text Styles */
+
+.text-yellow {color : #ff0;}
+.text-red    {color : #f00;}
+.text-white  {color : #fff;}
+.text-blue   {color : #88f;}
+.text-cyan   {color : #08f;}
+.text-green  {color : #0f0;}
+.text-gray   {color : #888;}
+
+.text-left   {text-align : left;}
+.text-right  {text-align : right;}
+.text-center {text-align : center;}
+
+.text-stroke {
+	color : #fff;
+	text-shadow : -1px -1px 0 #000,  1px -1px 0 #000,  -1px 1px 0 #000,  1px 1px 0 #000;
+}
+
+	/* Styles */
+
+.backcolor-light {background-color : #444;}
+.backcolor-med   {background-color : #222;}
+.backcolor-dark  {background-color : #111;}
+
+.border-med   {border : 2px solid #222;}
+.frame-yellow {border : 2px solid #ff0;}
+.frame-blue   {border : 2px solid #08f;}
+
+.cover-dark {
+	background-color : #222;
+	opacity : 0.9;
+	filter  : alpha(opacity=90);
+}
+
+	/* Objects */
+
+.border-med-side {
+	border-right : 2px solid #222;
+}
+
+.button-group {
+	white-space : normal;
+}
+
+	/* Menus */
+
+.menu-body {
+	width      : inherit;
+	height     : inherit;
+	padding    : 8px;
+	overflow-y : auto;
+	clear      : both;
+	border     : 1px solid #444;
+	color      : #888;
+}
+
+.menu-footer {
+	height : 60px;
+	width  : 100%;
+	margin-bottom : -60px;
+	padding       : 4px 8px;
+}
+
+	/* Icons */
+
+.menu-body .item-icon,
+.menu-body .ship-icon,
+.menu-body .rank-icon {
+	float : left;
+}
+
+.item-icon {
+	width   : 60px;
+	height  : 60px;
+	color   : #fff;
+	padding : 2px;
+}
+
+.item-icon.hull {
+	background-image : url("../images/shipHulls_Sm.png");
+}
+
+.item-icon.hull.big {
+	width  : 100px;
+	height : 100px;
+	background-image : url("../images/shipHulls_Lg.png");
+}
+
+.item-icon.weap {
+	background-image : url("../images/shipWeapons.png");
+}
+
+.item-icon.armr {
+	background-image : url("../images/shipArmor.png");
+}
+
+.item-icon.spec {
+	background-image : url("../images/shipSpecials.png");
+}
+
+.item-icon.tact {
+	background-image : url("../images/shipTactMods.png");
+}
+
+.ship-icon {
+	width  : 60px;
+	height : 60px;
+}
+
+.rank-icon {
+	width  : 40px;
+	height : 60px;
+	margin : auto;
+	background-image : url("../images/shipRanks.png");
+}
+
+.placeholder-icon {
+	width  : 60px;
+	height : 60px;
+	float  : left;
+}
+
+	/* Capacity Bar */
+
+.capacity {
+	width            : 120px;
+	height           : 12px;
+	margin           : auto;
+	background-color : #111;
+	border           : 2px solid #fff;
+	
+}
+
+.capacity.mini {
+	width        : 40px;
+	height       : 6px;
+	border-width : 1px;
+	
+}
+
+.capacity-bar {
+	height           : 100%;
+	overflow         : hidden;
+	background-color : #0f0;
+}
+
+.capacity-bar.over {
+	background-color : #f00;
+}
+
+/* //////// MAIN PAGE //////// */
+
+/* //// Page Structure //// */
+
+	/* Main Wrapper */
+
+.main-wrapper {
+	width  : inherit;
+	height : inherit;
+	padding-top : 72px;
+}
+
+.main-wrapper-head,
+.main-wrapper-body {
+	width : inherit;
+}
+
+.main-wrapper-head {
+	height     : 72px;
+	margin-top : -72px;
+}
+
+.main-wrapper-body {
+	height : inherit;
+}
+
+	/* Main Head Wrapper */
+
+.main-head-wrapper-top,
+.main-head-wrapper-bottom {
+	width : inherit;
+}
+
+.main-head-wrapper-top {
+	height : 60%;
+}
+
+.main-head-wrapper-bottom {
+	height : 40%;
+}
+
+	/* Main Head Tabs */
+
+.main-head-tab-wrapper,
+a.main-head-tab {
+	height : 100%;
+	float  : left;
+}
+
+.main-head-tab-wrapper {
+	width : auto;
+}
+
+a.main-head-tab {
+	width   : 200px;
+	display : block;
+	margin  : 2px;
+	padding : 4px 8px;
+	background-color : inherit;
+	border           : 2px solid #444;
+	color            : #444;
+}
+
+a.main-head-tab:hover {
+	border-color : #fff;
+	color        : #fff;
+}
+
+a.main-head-tab.hidden {
+	display : none;
+}
+
+a.main-head-tab.focus,
+a.main-head-tab.hidden.focus {
+	display          : block;
+	background-color : #444;
+	color            : #111;
+}
+
+a.main-head-tab.focus:hover {
+	border-color : #444;
+}
+
+/* //// Body View Structure //// */
+
+	/* Main Body Wrapper */
+
+.main-view {
+	width  : inherit;
+	height : 100%;
+}
+
+.main-tool {
+	padding : 12px;
+}
+
+.main-tool > p {
+	margin : 12px;
+}
+
+	/* View Wrapper */
+
+.view-wrapper {
+	width       : inherit;
+	height      : inherit;
+	position    : relative;
+	padding-top : 80px;
+	overflow    : auto;
+}
+
+.view-wrapper-head,
+.view-wrapper-body {
+	width : inherit;
+}
+
+.view-wrapper-head {
+	height     : 80px;
+	margin-top : -80px;
+	padding    : 12px 24px;
+	border-bottom : 2px solid #222;
+	text-align    : left;
+	white-space   : nowrap;
+}
+
+.view-wrapper-body {
+	height   : inherit;
+	overflow : auto;
+}
+
+	/* Objects */
+
+#shroud {
+	width    : inherit;
+	height   : inherit;
+	position : fixed;
+	left     : 0;
+	top      : 0;
+	z-index  : 5;
+	padding  : 24px;
+	color    : #fff;
+}
+
+/* //////// SHIPYARD //////// */
+
+	/* //// View Structure //// */
+
+.sy-wrapper > .view-wrapper-body {
+	padding-left : 320px;
+}
+
+.sy-shipinfo,
+.sy-designer {
+	height : auto;
+	float  : left;
+}
+
+.sy-shipinfo {
+	width       : 320px;
+	min-height  : 100%;
+	height      : auto;
+	margin-left : -320px;
+	padding     : 12px 0px;
+	overflow-y  : auto;
+}
+
+.sy-shipinfo-section,
+.sy-shipinfo-block {
+	padding : 0px 4px;
+}
+
+.sy-shipinfo-section {
+	width : 100%;
+}
+
+.sy-shipinfo-col {
+	width : 50%;
+	float : left;
+}
+
+.sy-shipinfo-head {
+	text-align : center;
+}
+
+.sy-shipinfo-ship {
+	width   : auto;
+	display : inline-block;
+	float   : none;
+	margin-left  : auto;
+	margin-right : auto;
+}
+
+.sy-shipinfo-slot {
+	float : left;
+}
+
+
+.sy-designer {
+	width : inherit;
+	padding-top : 72px;
+}
+
+.sy-designer-head,  .sy-designer-body {
+	width : inherit;
+}
+
+.sy-designer-head {
+	width  : inherit;
+	height : 72px;
+	margin-top : -72px;
+	padding    : 6px;
+}
+
+.sy-designer-body {
+	width  : inherit;
+	height : inherit;
+}
+
+.sy-designer-view {
+	width  : inherit;
+	height : inherit;
+}
+
+	/* Fleet Data */
+
+.sy-box-fleet {
+	float       : left;
+	text-align  : left;
+	white-space : nowrap;
+}
+
+.sy-fleet-section {
+	display : inline-block;
+	float   : left;
+	margin  : 0px 8px;
+}
+
+.sy-fleet-slot {
+	float : left;
+}
+
+.sy-fleet-slot : hover {
+	background-color : #fff;
+}
+
+.sy-fleet-slot.focus {
+	background-color : #0f0;
+}
+
+	/* Ship Data */
+
+.sy-shipdata-table {
+	width      : 100%;
+	margin-top : 8px;
+	color      : #fff;
+}
+
+.sy-shipdata-table > caption {
+	border-top : 1px solid #888;
+}
+
+.sy-shipdata-table td:first-child {
+	text-align : right;
+}
+
+.sy-shipdata-table td:only-child {
+	text-align : center;
+}
+
+.sy-shipdata-table td:nth-child(2) {
+	color : #ff0;
+	text-align : left;
+}
+
+.sy-ship-totals {
+	font-weight : bold;
+}
+
+.sy-weight-block {
+	width : 100%;
+	text-align : center;
+}
+
+	/* List View */
+
+.sy-list-col {
+	width : 33%;
+	float : left;
+}
+
+.row .sy-list-col {
+	width : inherit;
+}
+
+.sy-list-item {
+	width  : 100%;
+	height : auto;
+	padding-left : 60px;
+}
+
+.row .sy-list-item {
+	width   : 260px;
+	display : inline-block;
+}
+
+.sy-list-slot,  .sy-list-data {
+	height : inherit;
+	float  : left;
+}
+
+.sy-list-slot {
+	width       : 60px;
+	margin-left : -60px;
+}
+
+.sy-list-data {
+	width   : inherit;
+	padding : 8px;
+}
+
+	/* Graph View */
+
+.sy-graph-col {
+	height : inherit;
+	float  : left;
+}
+
+.sy-graph-row {
+	width   : 100%;
+	height  : 50%;
+	display : inline-block;
+}
+
+.sy-graph-block {
+	width   : auto;
+	height  : 100%;
+	float   : left;
+	padding : 8px;
+}
+
+.sy-graph-main {
+	width : auto;
+}
+
+svg	{
+	display : block;
+	float   : left;
+}
+
+.graph-back {
+	fill : #111;
+}
+
+.graph-border {
+	stroke : #fff;
+	stroke-width : 2;
+	fill : none;
+}
+
+
+.axis-label.white {
+	fill : #fff;
+}
+
+.axis-label.gray {
+	fill : #444;
+}
+
+.graph-axis-dotted {
+	stroke : #fff;
+	stroke-width : 1;
+}
+
+
+.graph-marker.gray {
+	stroke : #444;
+}
+
+.graph-marker.white {
+	stroke : #fff;
+}
+
+.graph-marker.dps-bar {
+	stroke-width : 20;
+}
+
+.graph-range-table {
+	margin-left  : auto;
+	margin-right : auto;
+}
+
+.graph-range-table td {
+	width : 50px;
+}
+
+.graph-range-table tr : first-child > td {
+	color : #000;
+}
+
+.graph-range-table tr : first-child > td : hover {
+	background-color : #fff;
+}
+
+.graph-range-table tr > td : first-child {
+	width : 30px;
+	background-color : #444;
+}
+
+	/* Item Slots */
+
+.sy-item-slot {
+	width  : 60px;
+	height : 60px;
+	margin : auto;
+	background-image : url("../images/itemSlots.png");
+}
+
+.sy-item-slot.hull {
+	width  : 100px;
+	height : 100px;
+	position : relative;
+	background-image : none;
+	background-color : #08f
+}
+
+.sy-item-slot.rank      {background-position : 170px   0px; width : 40px;}
+.sy-item-slot.rfit      {background-position : 120px   0px;}
+.sy-item-slot.weap.deck {background-position :   0px 120px;}
+.sy-item-slot.weap.both {background-position : 180px 120px;}
+.sy-item-slot.weap.undr {background-position : 120px 120px;}
+.sy-item-slot.weap.air  {background-position :  60px 120px;}
+.sy-item-slot.armr      {background-position :   0px  60px;}
+.sy-item-slot.spec      {background-position : 180px  60px;}
+.sy-item-slot.tact      {background-position : 120px  60px;}
+
+.sy-item-slot:hover {background-color : #fff;}
+.sy-item-slot.focus {background-color : #0f0;}
+
+	/* Item Data */
+
+.sy-item-data {
+	width : inherit;
+	color : #888;
+}
+
+.sy-item-data > p {
+	line-height : 10pt;
+}
+
+.sy-item-data span {
+	padding : 2px;
+}
+
+	/* Item Menus */
+
+.sy-view-menu,
+.sy-view-menu:before {
+	width    : inherit;
+	height   : inherit;
+	position : absolute;
+	top      : 0;
+	left     : 0;
+	padding  : 36px;
+}
+
+.sy-view-menu:before {
+	background-color : #444;
+	opacity : 0.5;
+	filter  : alpha(opacity=50);
+	content : "";
+}
+
+.sy-menu {
+	height   : inherit;
+	width    : inherit;
+	position : relative;
+	padding  : 40px 12px 60px 12px;
+	background-color : #222;
+	border           : 2px solid #888;
+}
+
+.sy-menu > h2 {
+	height : 40px;
+	margin-top : -40px;
+}
+
+.sy-menu-select-table {
+	display : table;
+	vertical-align : top;
+}
+
+.sy-menu-select-row {
+	display : table-row;
+	float   : none;
+}
+
+.sy-menu-select-col {
+	display : table-cell;
+	float   : none;
+	vertical-align : top;
+}
+
+.sy-menu-select-block {
+	display     : inline-block;
+	white-space : nowrap;
+}
+
+.sy-menu-select-item {
+	width  : 60px;
+	height : 60px;
+	float    : left;
+	position : relative;
+}
+
+.sy-menu-select-item:hover {
+	background-color : #fff;
+}
+
+.sy-menu-select-item.focus {
+	background-color : #0f0;
+}
+
+.sy-menu-select-item.block:hover {
+	background-color : inherit;
+}
+
+.sy-menu-select-item > .item-icon {
+	position : absolute;
+	top      : 0;
+	left     : 0;
+}
+
+.sy-menu-select-item > .cover-dark {
+	width    : inherit;
+	height   : inherit;
+	display  : none;
+	position : absolute;
+	top      : 0;
+	left     : 0;
+}
+
+.sy-menu-select-item.block > .cover-dark {
+	display : block;
+}
+
+	/* Retrofit Menu */
+
+.sy-retro-block {
+	width   : 96px;
+	display : inline-block;
+	margin  : 8px 4px;
+}
+
+	/* Save Menu */
+
+.shipsave-slot {
+	width   : 72px;
+	height  : 100px;
+	float   : left;
+	padding : 6px;
+	color   : #fff;
+}
+
+.shipsave-slot.focus {
+	background-color : #0f0;
+	color            : #000;
+}
+
+.shipsave-slot:hover {
+	background-color : #fff;
+	color            : #000;
+}
+
+.shipsave-slot > p {
+	float : left;
+}
+
+	/* Best Menu */
+
+.best-col {
+	width        : 80%;
+	margin-left  : auto;
+	margin-right : auto;
+}
+
+.best-section {
+	margin : 8px 0px;
+}
+
+.best-row {
+	margin : 4px 0px;
+}
+
+.best-result {
+	min-height : 68px;
+	padding    : 2px;
+	background-color : #111;
+}
+
+.best-result > .item-icon {
+	float        : left;
+	margin-right : 2px;
+}
+
+.disabled .best-result,
+.disabled .text-box {
+	background-color : #444;
+}
+
+.disabled .best-result > .item-icon {
+	display : none;
+}
+
+/* //////////////// DATA TABLE //////////////// */
+
+	/* Basic */
+
+.dt-wrapper > .view-wrapper-body {
+	padding-left : 200px;
+}
+
+#dt-menu-v,
+.dt-table-box {
+	height : 100%;
+	float  : left;
+}
+
+#dt-menu-v {
+	width   : 200px;
+	padding : 8px;
+	margin-left : -200px;
+	overflow-y  : auto;
+}
+
+.dt-menu-v-checklist {
+	width      : inherit;
+	margin-top : 4px;
+	color      : #fff;
+	text-align : left;
+}
+
+.dt-table-box {
+	width    : inherit;
+	overflow : auto;
+}
+
+	/* Table */
+
+.dt-table-data {
+	width : 1px;
+	color : #fff;
+	table-layout : fixed;
+}
+
+.dt-table-data > tbody > tr > td {
+	width    : 80px;
+	padding  : 4px;
+	overflow : hidden;
+	background-color : #222;
+}
+
+.dt-table-data > tbody > tr > td:first-child {
+	width : 120px;
+	background-color : #444;
+}
+
+.dt-table-data > tbody > tr > td:first-child:hover /* Data Table first column hover*/ {
+	background-color : #fff;
+	color            : #444;
+}
+
+.dt-table-data > tbody > tr > td:first-child ul /* Data Table first column nested lists */ {
+	margin-left : 20px;
+}
+
+.dt-table-data td table,
+.dt-table-data td div /* Data Table nested tables */ {
+	width  : 90%;
+	margin : auto;
+}
+
+.dt-table-data td ul {
+	margin-left         : 15px;
+	overflow            : visible;
+	list-style          : square;
+	list-style-position : outside;
+	text-align          : left;
+}
+
+.dt-table-data td li,
+.dt-table-data td p {
+	margin-top : 5px;
+	overflow   : visible;
+}
+
+.dt-table-data .dt-sort-up td {
+	border : 1px solid #0f0;
+	color  : #ff0;
+}
+
+.dt-table-data .dt-sort-dn td {
+	border : 1px solid #f00;
+	color  : #ff0;
+}
+
+/* //////////////// BATTLE //////////////// */
+
+	/* Battle Map */
+
+.bm-body-view {
+	width  : inherit;
+	height : inherit;
+}
+
+.bm-battle-map,
+.bm-battle-info {
+	width    : auto;
+	height   : inherit;
+	float    : left;
+	overflow : auto;
+}
+
+.bm-battle-map {
+	position  : relative;
+	max-width : 75%;
+}
+
+.bm-battle-info {
+	min-width  : 25%;
+	padding    : 24px;
+	color      : #fff;
+	text-align : left;
+}
+
+.bm-sea {
+	width      : 1000px;
+	height     : 1000px;
+	background : #08f url("../images/sea.png") repeat;
+}
+
+.bm-sprite-ship {
+	width    : 40px;
+	height   : 40px;
+	margin   : 0;
+	background-image : url("../images/bSprites.png");
+}
+
+.bm-sprite-ship.focus {
+	border : 1px solid #0f0;
+}
+
+/* //// Setup //// */
+
+	/* Structure */
+
+.bm-setup-wrapper {
+	width  : 100%;
+	height : 100%;
+	padding-left : 200px;
+}
+
+.bm-setup-options,
+.bm-setup-teams {
+	height : 100%;
+	float  : left;
+}
+
+.bm-setup-options {
+	width       : 200px;
+	margin-left : -200px;
+	padding     : 8px;
+}
+
+.bm-setup-teams {
+	width    : 100%;
+	overflow : auto;
+}
+
+	/**/
+
+.bm-menu-slot-team {
+	width      : auto;
+	height     : inherit;
+	float      : left;
+	margin     : 4px;
+	padding    : 8px;
+	overflow-y : auto;
+	border     : 2px solid #444;
+}
+
+.bm-menu-slot-team.focus {
+	border-color : #fff;
+}
+
+.bm-menu-slot-fleet {
+	width     : auto;
+	max-width : 100px;
+	height    : auto;
+	float     : left;
+	margin    : 4px;
+	padding   : 4px;
+	border    : 1px dotted #888;
+}
+
+.bm-menu-slot-ship {
+	width : 80px;
+}
+
+.bm-menu-slot-ship > p {
+	color : #fff;
+}
+
+#bm-ship-menu {
+	position : absolute;
+	left     : 0;
+	top      : 0;
+	z-index  : 3;
+}
+
+	/* Ship Graphics */
+
+.bm-ship-graphic {
+	width    : 40px;
+	height   : 50px;
+	position : absolute;
+	overflow : visible;
+}
+
+.bm-ship-graphic-upper {
+	width  : 100%;
+	
+	height : 40px;
+	overflow : visible;
+}
+
+.bm-ship-graphic-lower {
+	width  : 100%;
+	height : 10px;
+}
